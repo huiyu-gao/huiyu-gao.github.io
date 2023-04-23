@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="VisFusion reconstructs 3D scene geometry from a monocular video with known camera poses incrementally. 
+        Accepted in CVPR 2023.">
+  <meta name="keywords" content="VisFusion, Online 3D Reconstruction, Visibility-aware">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VisFusion</title>
+
+  <!-- Bootstrap -->
+  <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/bulma.min.css">
+  <link rel="stylesheet" href="./css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./js/fontawesome.all.min.js"></script>
+  <script src="./js/bulma-carousel.min.js"></script>
+  <script src="./js/bulma-slider.min.js"></script>
+  <script src="./js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">VisFusion: Visibility-aware Online 3D Scene Reconstruction from Videos</h1>
+          <h2 class="title is-4">CVPR 2023</h2>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="">Huiyu Gao</a>,</span>
+            <span class="author-block">
+              <a href="https://wei-mao-2019.github.io/home/" target="_blank">Wei Mao</a>,</span>
+            <span class="author-block">
+              <a href="http://users.cecs.anu.edu.au/~mliu/index.html" target="_blank">Miaomiao Liu</a>,</span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Australian National University</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="resources/Visibility-aware Online 3D Scene Reconstruction from Videos.pdf"
+                   target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="resources/Visibility-aware Online 3D Scene Reconstruction from Videos --- supplementary material.pdf"
+                   target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Supplementary </span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/huiyu-gao/VisFusion"
+                   target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!--/ Abstract. -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Abstract</h2>
+        <video width="90%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="" id="header_vid">
+          <source src="resources/demo1.mp4" type="video/mp4">
+        </video>
+        <div class="content has-text-justified">
+          <p>
+            We propose VisFusion, a visibility-aware online 3D scene reconstruction approach from 
+            posed monocular videos. In particular, we aim to reconstruct the scene from volumetric 
+            features. Unlike previous reconstruction methods which aggregate features for each 
+            voxel from input views without considering its visibility, we aim to improve the feature
+             fusion by explicitly inferring its visibility from a similarity matrix, computed from 
+             its projected features in each image pair. Following previous works, our model is a 
+             coarse-to-fine pipeline including a volume sparsification process. Different from their 
+             works which sparsify voxels globally with a fixed occupancy threshold, we perform the 
+             sparsification on a local feature volume along each visual ray to preserve at least 
+             one voxel per ray for more fine details. The sparse local volume is then fused with 
+             a global one for online reconstruction. We further propose to predict TSDF in a 
+             coarse-to-fine manner by learning its residuals across scales leading to better TSDF 
+             predictions. Experimental results on benchmarks show that our method can achieve 
+             superior performance with more scene details.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--/ Method. -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-centered">
+          <img src="./resources/overview.png"/>
+        </div>
+        <div class="content has-text-justified">
+          <p>
+            Given a fragment of a video, we first construct 3D feature volumes of different resolutions. 
+            The feature of each voxel is obtained by projecting it back to every camera view. The features 
+            from different camera views are then fused via the predicted visibility (local feature fusion). 
+            We then extract the local occupancy and TSDF from the fused feature followed by a ray-based 
+            sparsification process to remove empty voxels. The sparse local feature volume is finally fused 
+            to global via GRU and used to produce the final TSDF. The global feature and final TSDF of coarse 
+            level are further upsampled and fed to the next level for refinement.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Reconstructions on ScanNet v2 -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Reconstructions on ScanNet v2</h2>
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe width="100%" src="https://sketchfab.com/playlists/embed?collection=086be5c0607a4a499cff19d7d0ebfdad&autostart=1"
+          title="VisFusion Reconstruction"
+          frameborder="0"
+          allowfullscreen
+          mozallowfullscreen="true"
+          webkitallowfullscreen="true"
+          allow="autoplay; fullscreen; xr-spatial-tracking"
+          xr-spatial-tracking
+          execution-while-out-of-viewport
+          execution-while-not-rendered
+          web-share
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{gao2023visfusion,
+  author    = {Gao, Huiyu and Mao, Wei and Liu, Miaomiao},
+  title     = {VisFusion: Visibility-aware Online 3D Scene Reconstruction from Videos},
+  journal   = {CVPR},
+  year      = {2023},
+}</code></pre>
+  </div>
+</section>
+
+
+<section class="section" id="Acknowledgements">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Acknowledgements</h2>
+    This research was supported in part by the Australia Research Council DECRA Fellowship (DE180100628) and 
+    ARC Discovery Grant (DP200102274).
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+            This webpage template is from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>. 
+            We sincerely thank <a href="https://keunhong.com/">Keunhong Park</a> for developing and open-sourcing this template.
+          </p>
+        </div>
+      </div>
+          <p></p>
+        </div>
+      </div>
+</footer>
+
+
+</body>
+</html>
