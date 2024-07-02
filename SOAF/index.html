@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="SOAF Scene Occlusion-aware Neural Acoustic Field. ">
+  <meta name="keywords" content="SOAF, Neural Acoustic Field, Occlusion-aware">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SOAF: Scene Occlusion-aware Neural Acoustic Field</title>
+
+  <!-- Bootstrap -->
+  <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/bulma.min.css">
+  <link rel="stylesheet" href="./css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./js/fontawesome.all.min.js"></script>
+  <script src="./js/bulma-carousel.min.js"></script>
+  <script src="./js/bulma-slider.min.js"></script>
+  <script src="./js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title"><span style="color:grey">SOAF</span>: <span style="color:grey">S</span>cene <span style="color:grey">O</span>cclusion-aware Neural <span style="color:grey">A</span>coustic <span style="color:grey">F</span>ield</h1>
+          <h2 class="title is-4"><span style="color:grey">ArXiv 2024</span></h2>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><a href="">Huiyu Gao</a><sup>1</sup>*,</span>
+            <span class="author-block"><a href="https://jiahao-ma.github.io/" target="_blank">Jiahao Ma</a><sup>1, 2</sup>*,</span>
+            <span class="author-block"><a href="https://people.csiro.au/a/d/david-ahmedtaristizabal" target="_blank">David Ahmedt-Aristizabal</a><sup>2</sup>,</span>
+            <span class="author-block"><a href="https://people.csiro.au/N/C/Chuong-Nguyen" target="_blank">Chuong Nguyen</a><sup>2</sup>,</span>
+            <span class="author-block"><a href="http://users.cecs.anu.edu.au/~mliu/index.html" target="_blank">Miaomiao Liu</a><sup>1</sup>,</span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Australian National University,</span>
+            <span class="author-block"><sup>2</sup>CSIRO DATA61</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href=""
+                   target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href=""
+                   target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body" style="text-align: center;">
+      <img src="./resources/cover.jpg" class="center" style="width: 80%">
+      <h2 class="subtitle has-text-centered" style="margin-top: 15px">
+        Pure <strong><i>distance-aware</i></strong> acoustic field <strong><i>vs.</i></strong> 
+        our <strong><i>occlusion-aware</i></strong> acoustic field.<br> 
+        Our SOAF models room geometry and wall occlusions for sound propagation, enabling more accurate 
+        binaural audio generation in multi-room environments.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<!-- Abstract. -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3" style="margin-top: -30px">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            This paper tackles the problem of novel view audio-visual synthesis along an
+            arbitrary trajectory in an indoor scene, given the audio-video recordings from other
+            known trajectories of the scene. Existing methods often overlook the effect of room
+            geometry, particularly wall occlusion to sound propagation, making them less accu-
+            rate in multi-room environments. In this work, we propose a new approach called
+            Scene Occlusion-aware Acoustic Field (SOAF) for accurate sound generation. Our
+            approach derives a prior for sound energy field using distance-aware parametric
+            sound-propagation modelling and then transforms it based on scene transmittance
+            learned from the input video. We extract features from the local acoustic field
+            centred around the receiver using a Fibonacci Sphere to generate binaural audio for
+            novel views with a direction-aware attention mechanism. Extensive experiments
+            on the real dataset RWAVS and the synthetic dataset SoundSpaces demonstrate that
+            our method outperforms previous state-of-the-art techniques in audio generation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Method. -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3" style="margin-top: -30px">Method</h2>
+        
+        <div class="content has-text-centered">
+          <img src="./resources/pipeline.png"/>
+        </div>
+
+        <div class="content has-text-justified">
+          <p>
+            <strong>Review.</strong> Starting with calibrated video, we reconstruct the scene using NeRF and 
+            build the global acoustic field. For novel view audio synthesis, 
+            the distribution of the local acoustic field <i>F</i><sub>ac</sub>, 
+            combined with visual features <i>F</i><sub>vis</sub> and the receiver's position <strong>p</strong><sub>rc</sub>, 
+            is fed into the network to predict the acoustic mixture mask <strong>m</strong><sub>m</sub> 
+            and difference masks <strong>m</strong><sup>l</sup><sub>d</sub> and <strong>m</strong><sup>r</sup><sub>d</sub>.
+            Our key contributions fall in the <strong>global and local acoustic field</strong> for occlusion modeling 
+            and the <strong>direction-aware attention mechanism</strong> for binaural channel distinction.
+          </p>
+        </div>
+
+        <img src="./resources/AcousticField.jpg" class="center" style="width: 760px; height: auto;">
+        <div class="content has-text-justified">
+          <p style="margin-top: 30px">
+            <strong>Global acoustic field.</strong> (<strong>A</strong>) The global acoustic field analyzes the 
+            distribution of energy absorption (<i>M</i>), acoustic transmittance (<i>T</i>), and sound energy (<i>E</i>) 
+            along the target ray. As <i>M</i> decreases with increased propagation distance, <i>T</i> varies with 
+            energy decay during sound wave collisions, and <i>E</i> is the combination of <i>M</i> and <i>T</i>. 
+            (<strong>B</strong>) Sound waves propagate through walls along the target ray, with collisions marked 
+            by yellow crosses. Subfigure (<strong>A,B</strong>) illustrates the distribution of <i>M</i> and <i>T</i> 
+            in the global acoustic field. (<strong>C,D</strong>) Compared with distance-aware acoustic field, 
+            occlusion-aware acoustic field considers the occlusion of walls during sound propagation,  
+            enabling more accurate sound generation in multi-room environments.
+          </p>
+          <div style="display: flex; justify-content: center; margin-top: 30px;">
+            <video id="replay-video" autoplay="autoplay" controls="controls" muted="muted" preload="" playsinline="" loop="" style="width: 760px; height: auto;">
+              <source src="./resources/global_local_acoustic_field.mp4" type="video/mp4">
+            </video>
+          </div>
+          <p style="margin-top: 30px">
+            <strong>Local acoustic field</strong> shows the distribution of sound energy around the receiver. 
+            A Fibonacci Sphere around the receiver collects sound energy from the global acoustic field, 
+            with colors from red to blue indicating high to low sound energy.
+          </p>
+        </div>
+
+        <img src="./resources/direction_attention.jpg" class="center" style="width: 760px; height: auto; margin-top: 30px;">
+        <div class="content has-text-justified">
+          <p style="margin-top: 30px">
+            <strong>Direction-aware attention mechanism.</strong> Binaural features are generated by a direction-aware 
+            attention mechanism. (<strong>A</strong>) Predefined left-right attention. 
+            (<strong>B</strong>) Local distribution of two receivers: Receiver 1 in the hallway, close to the sound 
+            source with higher energy; Receiver 2 in the kitchen, further away and obstructed with lower energy. 
+            Energy comparison is highlighted in the sub-figure C color bar. 
+            (<strong>C</strong>) Direction-aware attention mechanism: The binaural features describe the spatial and 
+            directional sound characteristics, generated by the combination of the left-right attention and the local 
+            acoustic field distribution.
+          </p>          
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Visualization. -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered ">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered" style="margin-top: -30px">Visualization</h2>
+        <div class="content has-text-justified">
+          <p>
+            We synthesize demo video and audio in real-world indoor scenes on the RWAVS dataset. 
+            <strong>Left</strong> displays the synthesized video with associate audio following an arbitrary 
+            trajectory. <strong>Middle</strong> shows the <strong>global acoustic field</strong> 
+            distribution, accounting for sound propagation distance and multi-room 
+            occlusion, with colors from yellow to blue representing high to low
+            sound energy. <strong>Right</strong> depicts the <strong>local acoustic field</strong> around 
+            the receiver, with colors from red to blue indicating high to low sound energy.
+            <strong><span style="color: red;">NOTICE: please wear headphones when watching videos!</span></strong>
+          </p>
+          <style>
+            .video-container {margin-bottom: 10px;}
+          </style>
+          
+          <div class="video-container">
+            <h4 class="title is-4">House (Multi-room)</h4>
+            <video id="replay-video" autoplay="autoplay" controls="controls" muted="muted" preload="" playsinline="" loop="" width="100%">
+              <source src="./resources/DemoHouse.mp4" type="video/mp4">
+            </video>
+          </div>
+          
+          <div class="video-container">
+            <h4 class="title is-4">Apartment (Multi-room)</h4>
+            <video id="replay-video" autoplay="autoplay" controls="controls" muted="muted" preload="" playsinline="" loop="" width="100%">
+              <source src="./resources/DemoApartment.mp4" type="video/mp4">
+            </video>
+          </div>
+          
+          <div class="video-container">
+            <h5 class="title is-4">Office (Single-room)</h5>
+            <video id="replay-video" autoplay="autoplay" controls="controls" muted="muted" preload="" playsinline="" loop="" width="100%">
+              <source src="./resources/DemoOffice.mp4" type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{gao2024soaf,
+  title     = {SOAF: Scene Occlusion-aware Neural Acoustic Field},
+  author    = {Gao, Huiyu and Ma, jiahao and Ahmedt-Aristizabal, David and Nguyen，Chuong and Liu, Miaomiao},
+  booktitle = {ArXiv},
+  year      = {2024}
+}</code></pre>
+  </div>
+</section>
+
+
+<!-- <section class="section" id="Acknowledgements">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Acknowledgements</h2>
+    This research was supported in part by the Australia Research Council DECRA Fellowship (DE180100628) and 
+    ARC Discovery Grant (DP200102274).
+  </div>
+</section> -->
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+            This webpage template is from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>. 
+            We sincerely thank <a href="https://keunhong.com/">Keunhong Park</a> for developing and open-sourcing this template.
+          </p>
+        </div>
+      </div>
+          <p></p>
+        </div>
+      </div>
+</footer>
+
+
+</body>
+</html>
